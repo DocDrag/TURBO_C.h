@@ -68,3 +68,8 @@ void clrscr() {
     // Move the cursor to the home coordinates
     SetConsoleCursorPosition(hConsole, homeCoords);
 }
+
+// Initializes the random number generator (similar to Turbo C's randomize)
+void randomize() {
+    srand(time(NULL));
+}
