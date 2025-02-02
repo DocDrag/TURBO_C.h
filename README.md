@@ -1,13 +1,14 @@
 ## 📖 Table of Contents
-- [English](#english)
-  - [⚠ Important Notes](#⚠-important-notes)
-  - [📥 Installation Guide](#📥-installation-guide)
-  - [🔧 Supported Functions](#🔧-supported-functions)
-  - [📜 License](#📜-license)
-- [ภาษาไทย](#ภาษาไทย)
-  - [⚠ หมายเหตุสำคัญ](#⚠-หมายเหตุสำคัญ)
-  - [📥 วิธีติดตั้ง](#📥-วิธีติดตั้ง)
-  - [🔧 ฟังก์ชันที่รองรับ](#🔧-ฟังก์ชันที่รองรับ)
+- [English](#-english)
+  - [⚠ Important Notes](#-important-notes)
+  - [📥 Installation Guide](#-installation-guide-dev-c)
+  - [🔧 Supported Functions](#-supported-functions)
+  - [📜 License](#-license--ใบอนุญาตใช้งาน)
+- [ภาษาไทย](#-ภาษาไทย)
+  - [⚠ หมายเหตุสำคัญ](#-หมายเหตุสำคัญ)
+  - [📥 วิธีติดตั้ง](#-วิธีติดตั้ง-dev-c)
+  - [🔧 ฟังก์ชันที่รองรับ](#-ฟังก์ชันที่รองรับ)
+  - [📜 ใบอนุญาตใช้งาน](#-license--ใบอนุญาตใช้งาน)
 
 ---
 
@@ -120,8 +121,6 @@ delay(ms);        // หน่วงเวลาตามจำนวนมิ�
 This library is provided **as-is**, without warranty of any kind.  
 For more information, visit:  
 🔗 **[GitHub Repository](https://github.com/DocDrag/TURBO_C.h)**  
-
----
 
 ### 🇹🇭 **คำอธิบายภาษาไทย**  
 ไลบรารีนี้ถูกแจกจ่าย **"ตามสภาพ"** (**As-Is**) โดยไม่มีการรับประกันใด ๆ ทั้งสิ้น  
