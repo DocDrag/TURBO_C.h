@@ -87,3 +87,22 @@ void gotoxy(int x, int y) {
     printf("\033[%d;%dH", y, x);  // ANSI escape code for cursor positioning
 }
 #endif
+
+// Function to set the text color in the console
+void textcolor(int foreground_color) {
+    foreground_color = foreground_color % 16; // Ensure value stays within 0-15
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), foreground_color);
+}
+
+// Function to set the background color in the console
+void textbackground(int background_color) {
+    background_color = background_color % 16; // Ensure value stays within 0-15
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (background_color << 4));
+}
+
+// Function to set both text and background colors in the console
+void setcolor(int foreground_color, int background_color) {
+    foreground_color = foreground_color % 16; // Ensure value stays within 0-15
+    background_color = background_color % 16; // Ensure value stays within 0-15
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), foreground_color + (background_color << 4));
+}
