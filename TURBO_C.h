@@ -1,10 +1,17 @@
 /**
- * This code works on Windows and has been tested using Dev C++ and Code::Blocks only.
- * Tested with GNU GCC Compiler.
- * Some functions may not be fully compatible with the Turbo C++ environment.
- * The code uses Windows APIs for console manipulation and ANSI escape codes.
- * Please open Dev C++ and Code::Blocks with Run as Administrator for better performance.
- * This file is not part of the mingw-w64 runtime package.
+ * Turbo C++ Compatibility Library v1.0.0
+ * 
+ * This library provides Turbo C++-style console functions for modern compilers.
+ * It has been tested on Windows using Dev C++ and Code::Blocks with the GNU GCC Compiler.
+ * 
+ * ⚠ Important Notes:
+ * - Some functions may not be fully compatible with the original Turbo C++ environment.
+ * - This library relies on Windows API for console manipulation and ANSI escape codes.
+ * - You **must** run Dev C++ and Code::Blocks as Administrator to display extended ASCII characters correctly.
+ * 
+ * This library is **not** part of the mingw-w64 runtime package.
+ * 
+ * Provided by: https://github.com/DocDrag/TURBO_C.h
  */
 
 #ifndef TURBO_C_H
@@ -17,6 +24,15 @@
 #define cprintf printf
 #define cscanf scanf
 
+// Function declarations
+void clrscr();
+void randomize();
+void gotoxy(int, int);
+void textcolor(int);
+void textbackground(int);
+void setcolor(int);
+void delay(int);
+
 // Macro for supporting different compilers (GCC, MSVC, etc.)
 #ifdef _MSC_VER
 #define INIT_CONSTRUCTOR __declspec(dllexport)
@@ -28,8 +44,14 @@
 INIT_CONSTRUCTOR void set_ascii_code_page() {
     SetConsoleOutputCP(437); // Set ASCII Code Page to 437 for extended ASCII characters
     
-    printf("Turbo C++ compatibility library for Dev C++ and Code::Blocks\n");
-    printf("Provided by: https://github.com/DocDrag/TURBO_C.h\n\n");
+    printf("Turbo C++ Compatibility Library v1.0.0\n");
+    printf("For Dev C++ and Code::Blocks\n");
+
+    printf("Provided by: ");
+    textcolor(9); // Set text color to blue
+    printf("https://github.com/DocDrag/TURBO_C.h\n\n");
+    textcolor(7); // Reset text color to default (light gray)
+
     printf("Note: You must run Dev C++ and Code::Blocks as Administrator.\n");
     printf("Certain extended ASCII characters may not display correctly otherwise.\n\n");
 }
