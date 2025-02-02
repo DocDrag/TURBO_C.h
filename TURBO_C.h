@@ -33,3 +33,38 @@ INIT_CONSTRUCTOR void set_ascii_code_page() {
 
     printf("Tip: Run Dev C++ and Code::Blocks as Administrator for better performance.\n\n");
 }
+
+// Clears the console screen
+void clrscr() {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    DWORD count;
+    DWORD cellCount;
+    COORD homeCoords = {0, 0};
+
+    // Get the number of character cells in the current buffer
+    if (hConsole == INVALID_HANDLE_VALUE) return;
+    if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) return;
+    cellCount = csbi.dwSize.X * csbi.dwSize.Y;
+
+    // Fill the entire buffer with spaces
+    if (!FillConsoleOutputCharacter(
+            hConsole,
+            (TCHAR) ' ',  // Character to write to the console (space)
+            cellCount,
+            homeCoords,
+            &count
+    )) return;
+
+    // Fill the entire buffer with the current colors and attributes
+    if (!FillConsoleOutputAttribute(
+            hConsole,
+            csbi.wAttributes,
+            cellCount,
+            homeCoords,
+            &count
+    )) return;
+
+    // Move the cursor to the home coordinates
+    SetConsoleCursorPosition(hConsole, homeCoords);
+}
