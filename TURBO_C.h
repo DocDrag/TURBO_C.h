@@ -106,3 +106,13 @@ void setcolor(int foreground_color, int background_color) {
     background_color = background_color % 16; // Ensure value stays within 0-15
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), foreground_color + (background_color << 4));
 }
+
+// Function to pause the program for a specified number of milliseconds
+void delay(int milliseconds) {
+    struct timespec req, rem;
+    req.tv_sec = milliseconds / 1000; // seconds
+    req.tv_nsec = (milliseconds % 1000) * 1000000; // milliseconds
+    nanosleep(&req, &rem);
+}
+
+#endif // TURBO_C_H
