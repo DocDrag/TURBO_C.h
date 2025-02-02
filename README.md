@@ -1,5 +1,3 @@
----
-
 ## 📖 Table of Contents
 - [English](#english)
   - [⚠ Important Notes](#⚠-important-notes)
