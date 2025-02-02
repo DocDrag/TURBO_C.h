@@ -73,3 +73,17 @@ void clrscr() {
 void randomize() {
     srand(time(NULL));
 }
+
+// Moves the console cursor to the specified (x, y) position
+#ifdef _WIN32
+void gotoxy(int x, int y) {
+    COORD coord;
+    coord.X = x - 1;  // Windows API uses 0-based indexing
+    coord.Y = y - 1;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+#else
+void gotoxy(int x, int y) {
+    printf("\033[%d;%dH", y, x);  // ANSI escape code for cursor positioning
+}
+#endif
