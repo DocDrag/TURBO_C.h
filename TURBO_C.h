@@ -10,7 +10,7 @@
 #ifndef TURBO_C_H
 #define TURBO_C_H
 
-#include <stdlib.h>    // For system, srand
+#include <stdlib.h>    // For srand
 #include <time.h>      // For time
 #include <windows.h>   // For SetConsoleTextAttribute, GetStdHandle
 
@@ -26,47 +26,34 @@
 
 // A function that will be called as soon as the program starts.
 INIT_CONSTRUCTOR void set_ascii_code_page() {
-    system("chcp 437");  // Set ASCII code page to 437 (for extended ASCII characters)
+    SetConsoleOutputCP(437); // Set ASCII Code Page to 437 for extended ASCII characters
     
     printf("Turbo C++ compatibility library for Dev C++ and Code::Blocks\n");
     printf("Provided by: https://github.com/DocDrag/TURBO_C.h\n\n");
-
     printf("Tip: Run Dev C++ and Code::Blocks as Administrator for better performance.\n\n");
 }
 
 // Clears the console screen
 void clrscr() {
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
-    DWORD count;
-    DWORD cellCount;
-    COORD homeCoords = {0, 0};
+    #ifdef _WIN32
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        CONSOLE_SCREEN_BUFFER_INFO csbi;
+        DWORD count;
+        DWORD cellCount;
+        COORD homeCoords = {0, 0};
 
-    // Get the number of character cells in the current buffer
-    if (hConsole == INVALID_HANDLE_VALUE) return;
-    if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) return;
-    cellCount = csbi.dwSize.X * csbi.dwSize.Y;
+        if (hConsole == INVALID_HANDLE_VALUE) return;
+        if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) return;
+        cellCount = csbi.dwSize.X * csbi.dwSize.Y;
 
-    // Fill the entire buffer with spaces
-    if (!FillConsoleOutputCharacter(
-            hConsole,
-            (TCHAR) ' ',  // Character to write to the console (space)
-            cellCount,
-            homeCoords,
-            &count
-    )) return;
-
-    // Fill the entire buffer with the current colors and attributes
-    if (!FillConsoleOutputAttribute(
-            hConsole,
-            csbi.wAttributes,
-            cellCount,
-            homeCoords,
-            &count
-    )) return;
-
-    // Move the cursor to the home coordinates
-    SetConsoleCursorPosition(hConsole, homeCoords);
+        // Clear console screen
+        if (!FillConsoleOutputCharacter(hConsole, ' ', cellCount, homeCoords, &count)) return;
+        if (!FillConsoleOutputAttribute(hConsole, csbi.wAttributes, cellCount, homeCoords, &count)) return;
+        SetConsoleCursorPosition(hConsole, homeCoords);
+    #else
+        printf("\033[2J\033[H");  // ANSI Escape Code for clearing screen
+        fflush(stdout);
+    #endif
 }
 
 // Initializes the random number generator (similar to Turbo C's randomize)
@@ -109,10 +96,14 @@ void setcolor(int foreground_color, int background_color) {
 
 // Function to pause the program for a specified number of milliseconds
 void delay(int milliseconds) {
-    struct timespec req, rem;
-    req.tv_sec = milliseconds / 1000; // seconds
-    req.tv_nsec = (milliseconds % 1000) * 1000000; // milliseconds
-    nanosleep(&req, &rem);
+    #ifdef _WIN32
+        Sleep(milliseconds);
+    #else
+        struct timespec req, rem;
+        req.tv_sec = milliseconds / 1000;
+        req.tv_nsec = (milliseconds % 1000) * 1000000;
+        nanosleep(&req, &rem);
+    #endif
 }
 
 #endif // TURBO_C_H
