@@ -13,3 +13,6 @@
 #include <stdlib.h>    // For system, srand
 #include <time.h>      // For time
 #include <windows.h>   // For SetConsoleTextAttribute, GetStdHandle
+
+#define cprintf printf
+#define cscanf scanf
