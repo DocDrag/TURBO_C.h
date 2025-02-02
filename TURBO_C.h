@@ -9,3 +9,7 @@
 
 #ifndef TURBO_C_H
 #define TURBO_C_H
+
+#include <stdlib.h>    // For system, srand
+#include <time.h>      // For time
+#include <windows.h>   // For SetConsoleTextAttribute, GetStdHandle
