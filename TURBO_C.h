@@ -16,3 +16,20 @@
 
 #define cprintf printf
 #define cscanf scanf
+
+// Macro for supporting different compilers (GCC, MSVC, etc.)
+#ifdef _MSC_VER
+#define INIT_CONSTRUCTOR __declspec(dllexport)
+#else
+#define INIT_CONSTRUCTOR __attribute__((constructor))
+#endif
+
+// A function that will be called as soon as the program starts.
+INIT_CONSTRUCTOR void set_ascii_code_page() {
+    system("chcp 437");  // Set ASCII code page to 437 (for extended ASCII characters)
+    
+    printf("Turbo C++ compatibility library for Dev C++ and Code::Blocks\n");
+    printf("Provided by: https://github.com/DocDrag/TURBO_C.h\n\n");
+
+    printf("Tip: Run Dev C++ and Code::Blocks as Administrator for better performance.\n\n");
+}
