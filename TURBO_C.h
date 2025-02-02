@@ -30,7 +30,8 @@ INIT_CONSTRUCTOR void set_ascii_code_page() {
     
     printf("Turbo C++ compatibility library for Dev C++ and Code::Blocks\n");
     printf("Provided by: https://github.com/DocDrag/TURBO_C.h\n\n");
-    printf("Tip: Run Dev C++ and Code::Blocks as Administrator for better performance.\n\n");
+    printf("Note: You must run Dev C++ and Code::Blocks as Administrator.\n");
+    printf("Certain extended ASCII characters may not display correctly otherwise.\n\n");
 }
 
 // Clears the console screen
